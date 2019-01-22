@@ -278,6 +278,50 @@ void reconnect() {
       }
     }
   }
+ 
+ /*loop parsing json*/
+void loop(){
+ if (!client.connected()) {
+    reconnect();
+  }
+
+  for (int m=0; m<=7; m++){
+      for (int n=0; n<=1; n++){
+          if (n==0){
+            Serial.print("device");
+            Serial.Print(iomap[m])
+            Serial.print("off")
+          }
+
+          if (n==1){
+              Serial.print("device");
+              Serial.print(iomode[m])
+              Serial.Print("on")
+          }
+
+      }
+  }
+  JSONencoder["UserID"]       = "userId";
+  JSONencoder["MacAddress"]   = macAddress;
+  JSONencoder["Processor"]    = "arduino";
+  JSONencoder["Type"]         = "IO";
+  JSONencoder["TimeStamp"]    = "timestamp";
+  JsonArray& values = JSONencoder.createNestedArray("Payloads");
+  payload.add(iomap[]
+
+  if (client.publish(mqtt_keywords2, JSONmessageBuffer) == true) {
+    Serial.println("Success sending message");
+  } else {
+    Serial.println("Error sending message");
+  }
+
+    client.loop();
+  Serial.println("-------------");
+ 
+  delay(10000);
+ 
+
+}
 }
 
 
